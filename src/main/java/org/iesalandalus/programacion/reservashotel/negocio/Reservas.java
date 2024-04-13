@@ -9,8 +9,6 @@ import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import static org.iesalandalus.programacion.reservashotel.MainApp.listarReservas;
-
 public class Reservas {
     private int capacidad;
     private int tamano;
