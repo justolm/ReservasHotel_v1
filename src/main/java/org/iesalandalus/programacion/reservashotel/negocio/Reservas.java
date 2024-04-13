@@ -7,6 +7,9 @@ import org.iesalandalus.programacion.reservashotel.dominio.TipoHabitacion;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+import static org.iesalandalus.programacion.reservashotel.MainApp.listarReservas;
 
 public class Reservas {
     private int capacidad;
@@ -54,7 +57,7 @@ public class Reservas {
             coleccionReservas[getTamano()]=new Reserva(reserva);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más reservas.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan mÃ¡s reservas.");
         }
     }
 
@@ -74,7 +77,7 @@ public class Reservas {
     }
     private Boolean tamanoSuperado (int indice) throws IllegalArgumentException{
         if (indice<0){
-            throw new IllegalArgumentException("ERROR: Indice tamaño incorrecto");
+            throw new IllegalArgumentException("ERROR: Indice tamaÃ±o incorrecto");
         }
         else if (indice >0 && indice<getTamano()){
             return false;
@@ -146,7 +149,7 @@ public class Reservas {
         Reserva[] copiaProfundaHabitacionesHabitacion = new Reserva[capacidad];
         for (int i=0 ; i < tamano ; i++){
             if (tipoHabitacion==null){
-                throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitación nula.");
+                throw new NullPointerException("ERROR: No se pueden buscar reservas de un tipo de habitaciÃ³n nula.");
             }
             if (coleccionReservas[i].getHabitacion().getTipoHabitacion().equals(tipoHabitacion)){
                 copiaProfundaHabitacionesHabitacion[j]=new Reserva(coleccionReservas[i]);
@@ -165,7 +168,7 @@ public class Reservas {
         Reserva[] copiaProfundaHabitacionesReservasFuturas = new Reserva[capacidad];
         for (int i=0 ; i < tamano ; i++){
             if (habitacion==null){
-                throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitación nula.");
+                throw new NullPointerException("ERROR: No se pueden buscar reservas de una habitaciÃ³n nula.");
             }
             if (coleccionReservas[i].getHabitacion().equals(habitacion)){
                 if (coleccionReservas[i].getFechaFinReserva().isAfter(LocalDate.now())){
@@ -176,4 +179,34 @@ public class Reservas {
         }
         return copiaProfundaHabitacionesReservasFuturas;
     }
+
+    public void realizarCheckin (Reserva reserva, LocalDateTime fecha){
+        if (reserva==null){
+            throw new NullPointerException("ERROR: La reserva no puede ser nula.");
+        }
+        if (fecha==null){
+            throw new NullPointerException("ERROR: La fecha no puede ser nula");
+        }
+        if (fecha.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("ERROR: La fecha no puede ser posterior a la actual.");
+        }
+        reserva.setCheckIn(fecha);
+    }
+
+    public void realizarCheckout (Reserva reserva, LocalDateTime fecha){
+        if (reserva==null){
+            throw new NullPointerException("ERROR: La reserva no puede ser nula.");
+        }
+        if (fecha==null){
+            throw new NullPointerException("ERROR: La fecha no puede ser nula");
+        }
+        if (fecha.isAfter(LocalDateTime.now())) {
+            throw new IllegalArgumentException("ERROR: La fecha no puede ser posterior a la actual.");
+        }
+        if (reserva.getCheckIn()==null || reserva.getCheckIn().isAfter(fecha)){
+            throw new IllegalArgumentException("ERROR: No se puede realizar el CheckOut sin un CheckIn previo.");
+        }
+        reserva.setCheckOut(fecha);
+    }
+
 }
