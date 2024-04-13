@@ -1,7 +1,7 @@
-package org.iesalandalus.programacion.reservashotel.negocio;
+package org.iesalandalus.programacion.reservashotel.modelo.negocio;
 
-import org.iesalandalus.programacion.reservashotel.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -23,10 +23,10 @@ public class Habitaciones {
     private Habitacion[] copiaProfundaHabitaciones() throws NullPointerException{
         tamano=getTamano();
         if (tamano<1){
-            throw new NullPointerException("ERROR: No es posible copiar una colección vacía");
+            throw new NullPointerException("ERROR: No es posible copiar una colecciï¿½n vacï¿½a");
         }
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colección vacía5");
+            throw new NullPointerException("ERROR:Colecciï¿½n vacï¿½a5");
         Habitacion[] copiaProfundaHabitaciones = new Habitacion[getCapacidad()];
         for (int i = 0; i < tamano; i++) {
             copiaProfundaHabitaciones[i] = new Habitacion(coleccionHabitaciones[i]);
@@ -35,15 +35,15 @@ public class Habitaciones {
     }
     public Habitacion[] get(TipoHabitacion tipoHabitacion) throws NullPointerException{
         if (tipoHabitacion==null){
-            throw new NullPointerException("ERROR: El tipo de habitación no puede estar vacío.");
+            throw new NullPointerException("ERROR: El tipo de habitaciï¿½n no puede estar vacï¿½o.");
         }
         tamano=getTamano();
         int j=0;
         if (tamano<1){
-            throw new NullPointerException("ERROR: No es posible copiar una colección vacía");
+            throw new NullPointerException("ERROR: No es posible copiar una colecciï¿½n vacï¿½a");
         }
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colección vacía5");
+            throw new NullPointerException("ERROR:Colecciï¿½n vacï¿½a5");
         Habitacion[] copiaProfundaHabitacionesFiltro = new Habitacion[getCapacidad()];
         for (int i = 0; i < tamano; i++) {
             if (coleccionHabitaciones[i].getTipoHabitacion().equals(tipoHabitacion)){
@@ -69,22 +69,22 @@ public class Habitaciones {
     }
     public void insertar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException {
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colección inexistente");
+            throw new NullPointerException("ERROR:Colecciï¿½n inexistente");
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
+            throw new NullPointerException("ERROR: No se puede insertar una habitaciï¿½n nula.");
         if (buscarIndice(habitacion)<getCapacidad()){
-            throw new OperationNotSupportedException("ERROR: Ya existe una habitación con ese identificador.");
+            throw new OperationNotSupportedException("ERROR: Ya existe una habitaciï¿½n con ese identificador.");
         }
         if (getTamano()<getCapacidad()){
             coleccionHabitaciones[getTamano()]=new Habitacion(habitacion);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más habitaciones.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan mï¿½s habitaciones.");
         }
     }
     private int buscarIndice(Habitacion habitacion) throws NullPointerException{
         if (habitacion==null){
-            throw new NullPointerException("ERROR: No se puede buscar sin indicar una habitación.");
+            throw new NullPointerException("ERROR: No se puede buscar sin indicar una habitaciï¿½n.");
         }
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHabitaciones[i]==null){
@@ -98,7 +98,7 @@ public class Habitaciones {
     }
     private Boolean tamanoSuperado(int indice) throws IllegalArgumentException{
         if (indice<0){
-            throw new IllegalArgumentException("ERROR: Indice tamaño incorrecto");
+            throw new IllegalArgumentException("ERROR: Indice tamaï¿½o incorrecto");
         }
         else if (indice >0 && indice<getTamano()){
             return false;
@@ -116,9 +116,9 @@ public class Habitaciones {
     }
     public Habitacion buscar(Habitacion habitacion) throws NullPointerException{
         if (habitacion==null)
-            throw new NullPointerException("ERROR:Buscar habitación nula");
+            throw new NullPointerException("ERROR:Buscar habitaciï¿½n nula");
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colección vacía");
+            throw new NullPointerException("ERROR:Colecciï¿½n vacï¿½a");
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHabitaciones[i].equals(habitacion)){//huesped.getDni().equals(coleccionHuespedes[i].getDni())){ //coleccionHuespedes[i].equals(huesped)
                 return new Habitacion(habitacion);
@@ -128,14 +128,14 @@ public class Habitaciones {
     }
     public void borrar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException{
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");
+            throw new NullPointerException("ERROR: No se puede borrar una habitaciï¿½n nula.");
         int indice = buscarIndice(habitacion);
         if (indice<=getCapacidad()){
             coleccionHabitaciones[indice]=null;
             desplazarUnaPosicionIzquierda(indice);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No existe ninguna habitación como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ninguna habitaciï¿½n como la indicada.");
         }
     }
     private void desplazarUnaPosicionIzquierda(int indice){

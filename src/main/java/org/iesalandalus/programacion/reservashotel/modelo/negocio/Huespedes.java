@@ -1,6 +1,6 @@
-package org.iesalandalus.programacion.reservashotel.negocio;
+package org.iesalandalus.programacion.reservashotel.modelo.negocio;
 
-import org.iesalandalus.programacion.reservashotel.dominio.Huesped;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 
 import javax.naming.OperationNotSupportedException;
 
@@ -23,10 +23,10 @@ public class Huespedes {
     private Huesped[] copiaProfundaHuespedes() throws NullPointerException, IllegalArgumentException{
         tamano=getTamano();
         if (tamano<1){
-            throw new NullPointerException("ERROR: No es posible copiar una colección vacía");
+            throw new NullPointerException("ERROR: No es posible copiar una colecciï¿½n vacï¿½a");
         }
         if (coleccionHuespedes==null)
-            throw new NullPointerException("ERROR: Colección vacía.");
+            throw new NullPointerException("ERROR: Colecciï¿½n vacï¿½a.");
         Huesped[] copiaProfundaHuespedes = new Huesped[getCapacidad()];
         for (int i = 0; i < tamano; i++) {
             copiaProfundaHuespedes[i] = new Huesped(coleccionHuespedes[i]);
@@ -36,7 +36,7 @@ public class Huespedes {
 
     public int getTamano() throws NullPointerException {
         if (coleccionHuespedes==null)
-            throw new NullPointerException("ERROR: Colección vacía.");
+            throw new NullPointerException("ERROR: Colecciï¿½n vacï¿½a.");
         for (int t = 0; t < getCapacidad() ; t++) {
             if (coleccionHuespedes[t] == null) {
                 return t;
@@ -46,30 +46,30 @@ public class Huespedes {
     }
     public int getCapacidad() throws NullPointerException {
         if (coleccionHuespedes==null)
-            throw new NullPointerException("ERROR: Colección vacía.");
+            throw new NullPointerException("ERROR: Colecciï¿½n vacï¿½a.");
         capacidad=coleccionHuespedes.length;
         return capacidad;
     }
     public void insertar(Huesped huesped) throws OperationNotSupportedException, NullPointerException {
         if (coleccionHuespedes==null)
-            throw new NullPointerException("ERROR:Colección inexistente");
+            throw new NullPointerException("ERROR:Colecciï¿½n inexistente");
         if (huesped==null)
-            throw new NullPointerException("ERROR: No se puede insertar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede insertar un huï¿½sped nulo.");
         if (buscarIndice(huesped)<getCapacidad()){
-            throw new OperationNotSupportedException("ERROR: Ya existe un huésped con ese dni.");
+            throw new OperationNotSupportedException("ERROR: Ya existe un huï¿½sped con ese dni.");
         }
         if (getTamano()<getCapacidad()){
             coleccionHuespedes[getTamano()]=new Huesped(huesped);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No se aceptan más huéspedes.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan mï¿½s huï¿½spedes.");
         }
     }
     private int buscarIndice(Huesped huesped) throws NullPointerException{
         if (huesped==null)
-            throw new NullPointerException("ERROR: No se puede buscar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede buscar un huï¿½sped nulo.");
         //if (coleccionHuespedes[0]==null)
-        //    throw new NullPointerException("ERROR:Colección vacía1");
+        //    throw new NullPointerException("ERROR:Colecciï¿½n vacï¿½a1");
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHuespedes[i]==null){
                 return getCapacidad()+1;
@@ -82,7 +82,7 @@ public class Huespedes {
     }
     private Boolean tamanoSuperado(int indice) throws IllegalArgumentException{
         if (indice<0){
-            throw new IllegalArgumentException("ERROR: Indice tamaño incorrecto");
+            throw new IllegalArgumentException("ERROR: Indice tamaï¿½o incorrecto");
         }
         else if (indice >0 && indice<getTamano()){
             return false;
@@ -100,9 +100,9 @@ public class Huespedes {
     }
     public Huesped buscar(Huesped huesped) throws NullPointerException, IllegalArgumentException{
         if (huesped==null)
-            throw new NullPointerException("ERROR: No se puede buscar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede buscar un huï¿½sped nulo.");
         if (coleccionHuespedes==null)
-            throw new NullPointerException("ERROR: Colección vacía.");
+            throw new NullPointerException("ERROR: Colecciï¿½n vacï¿½a.");
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHuespedes[i].equals(huesped)){//huesped.getDni().equals(coleccionHuespedes[i].getDni())){
                 return new Huesped(coleccionHuespedes[i]);
@@ -112,14 +112,14 @@ public class Huespedes {
     }
     public void borrar(Huesped huesped) throws OperationNotSupportedException, NullPointerException{
         if (huesped==null)
-            throw new NullPointerException("ERROR: No se puede borrar un huésped nulo.");
+            throw new NullPointerException("ERROR: No se puede borrar un huï¿½sped nulo.");
         int indice = buscarIndice(huesped);
         if (indice<=getCapacidad()){
             coleccionHuespedes[indice]=null;
             desplazarUnaPosicionIzquierda(indice);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No existe ningún huésped como el indicado.");
+            throw new OperationNotSupportedException("ERROR: No existe ningï¿½n huï¿½sped como el indicado.");
         }
     }
     private void desplazarUnaPosicionIzquierda(int indice){
