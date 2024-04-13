@@ -1,104 +1,106 @@
-package org.iesalandalus.programacion.reservashotel.modelo;
+package org.iesalandalus.programacion.reservashotel.controlador;
 
+import org.iesalandalus.programacion.reservashotel.modelo.Modelo;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.negocio.Habitaciones;
-import org.iesalandalus.programacion.reservashotel.modelo.negocio.Huespedes;
-import org.iesalandalus.programacion.reservashotel.modelo.negocio.Reservas;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDateTime;
 
-public class Modelo {
-    private static final int CAPACIDAD = 5;
-    private static Habitaciones habitaciones;
-    private static Reservas reservas;
-    private static Huespedes huespedes;
+public class Controlador {
+    private Modelo modelo;
+    private Vista vista;
 
-    public Modelo(){}
+    public Controlador (Modelo modelo, Vista vista){
+        if (modelo==null){
+            throw new NullPointerException("ERROR: El modelo no puede ser nulo.");
+        }
+        if (vista==null){
+            throw new NullPointerException("ERROR: La vista no puede ser nula.");
+        }
+        this.modelo=modelo;
+        this.vista=vista;
+    }
 
-    public void comenzar() throws IllegalArgumentException, NullPointerException {
-        habitaciones = new Habitaciones(CAPACIDAD);
-        reservas = new Reservas(CAPACIDAD);
-        huespedes = new Huespedes(CAPACIDAD);
+    public void comenzar(){
+        modelo.comenzar();
     }
 
     public void terminar(){
-        System.out.println("El modelo ha finalizado.");
+        modelo.terminar();
     }
 
-    public void insertar (Huesped huesped) throws OperationNotSupportedException, NullPointerException {
-        huespedes.insertar(huesped);
+    public void insertar(Huesped huesped) throws OperationNotSupportedException, NullPointerException {
+        modelo.insertar(huesped);
     }
 
-    public Huesped buscar (Huesped huesped) throws IllegalArgumentException, NullPointerException {
-        return huespedes.buscar(huesped);
+    public Huesped buscar(Huesped huesped) throws NullPointerException, IllegalArgumentException {
+        return modelo.buscar(huesped);
     }
 
-    public void borrar (Huesped huesped) throws OperationNotSupportedException, NullPointerException {
-        huespedes.borrar(huesped);
+    public void borrar(Huesped huesped) throws OperationNotSupportedException, NullPointerException {
+        modelo.borrar(huesped);
     }
 
     public Huesped[] getHuespedes(){
-        return huespedes.get();
+        return modelo.getHuespedes();
     }
 
     public void insertar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException {
-        habitaciones.insertar(habitacion);
+        modelo.insertar(habitacion);
     }
 
     public Habitacion buscar (Habitacion habitacion) throws NullPointerException {
-        return habitaciones.buscar(habitacion);
+        return modelo.buscar(habitacion);
     }
 
     public void borrar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException {
-        habitaciones.borrar(habitacion);
+        modelo.borrar(habitacion);
     }
 
     public Habitacion[] getHabitaciones() {
-        return habitaciones.get();
+        return modelo.getHabitaciones();
     }
 
     public Habitacion[] getHabitaciones(TipoHabitacion tipoHabitacion) throws NullPointerException {
-        return habitaciones.get(tipoHabitacion);
+        return modelo.getHabitaciones(tipoHabitacion);
     }
 
     public void insertar (Reserva reserva) throws OperationNotSupportedException, NullPointerException {
-        reservas.insertar(reserva);
+        modelo.insertar(reserva);
     }
 
     public Reserva buscar (Reserva reserva) throws NullPointerException {
-        return reservas.buscar(reserva);
+        return modelo.buscar(reserva);
     }
 
     public void borrar (Reserva reserva) throws OperationNotSupportedException, NullPointerException {
-        reservas.borrar(reserva);
+        modelo.borrar(reserva);
     }
 
     public Reserva[] getReservas() {
-        return reservas.get();
+        return modelo.getReservas();
     }
 
     public Reserva[] getReservas(Huesped huesped) throws NullPointerException {
-        return reservas.getReservas(huesped);
+        return modelo.getReservas(huesped);
     }
 
     public Reserva[] getReservas(TipoHabitacion tipoHabitacion) throws NullPointerException {
-        return reservas.getReservas(tipoHabitacion);
+        return modelo.getReservas(tipoHabitacion);
     }
 
     public Reserva[] getReservasFuturas(Habitacion habitacion) throws NullPointerException {
-        return reservas.getReservasFuturas(habitacion);
+        return modelo.getReservasFuturas(habitacion);
     }
 
     public void realizarCheckin (Reserva reserva, LocalDateTime fecha) throws IllegalArgumentException, NullPointerException {
-        reservas.realizarCheckin(reserva, fecha);
+        modelo.realizarCheckin(reserva, fecha);
     }
 
     public void realizarCheckout (Reserva reserva, LocalDateTime fecha) throws IllegalArgumentException, NullPointerException {
-        reservas.realizarCheckout(reserva, fecha);
+        modelo.realizarCheckout(reserva, fecha);
     }
-
 }
