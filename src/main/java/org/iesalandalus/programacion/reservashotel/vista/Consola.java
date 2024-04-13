@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.utilidades.Entrada;
 import javax.naming.OperationNotSupportedException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Consola {
@@ -66,6 +67,18 @@ public class Consola {
             return LocalDate.parse(mensaje, formatoFecha);
         } catch (DateTimeException e){
             throw new IllegalArgumentException("ERROR: La fecha no tiene un formato válido.");
+        }
+    }
+
+    public static LocalDateTime leerFechaHora (String mensaje) {
+        DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA);
+        if (mensaje==null){
+            throw new NullPointerException("ERROR: La fecha/hora está vacía.");
+        }
+        try {
+            return LocalDateTime.parse(mensaje, formatoFechaHora);
+        } catch (DateTimeException e){
+            throw new IllegalArgumentException("ERROR: La fecha/hora no tiene un formato válido.");
         }
     }
 
