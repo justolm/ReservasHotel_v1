@@ -5,6 +5,7 @@ import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
 import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.vista.Vista;
 
 import javax.naming.OperationNotSupportedException;
 import java.time.LocalDateTime;
@@ -22,14 +23,17 @@ public class Controlador {
         }
         this.modelo=modelo;
         this.vista=vista;
+        this.vista.setControlador(this);
     }
 
     public void comenzar(){
         modelo.comenzar();
+        vista.comenzar();
     }
 
     public void terminar(){
         modelo.terminar();
+        vista.terminar();
     }
 
     public void insertar(Huesped huesped) throws OperationNotSupportedException, NullPointerException {

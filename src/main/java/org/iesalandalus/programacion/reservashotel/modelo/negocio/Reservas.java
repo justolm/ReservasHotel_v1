@@ -84,7 +84,7 @@ public class Reservas {
     }
     private Boolean capacidadSuperada (int indice) throws IllegalArgumentException{
         if (indice<0){
-            throw new IllegalArgumentException("ERROR: Indice capacidad incorrecto");
+            throw new IllegalArgumentException("ERROR: Indice capacidad incorrecto.");
         }
         else if (indice >0 && indice<getCapacidad()){
             return false;
@@ -182,11 +182,17 @@ public class Reservas {
         if (reserva==null){
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
-        if (fecha==null){
+        else if (fecha==null){
             throw new NullPointerException("ERROR: La fecha no puede ser nula");
         }
-        if (fecha.isAfter(LocalDateTime.now())) {
+        else if (fecha.isAfter(LocalDateTime.now())) {
             throw new IllegalArgumentException("ERROR: La fecha no puede ser posterior a la actual.");
+        }
+        else if (fecha.isBefore(reserva.getFechaInicioReserva().atStartOfDay())){
+            throw new IllegalArgumentException("ERROR: No se puede realizar el CheckIn en una fecha anterior a la reservada.");
+        }
+        else if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusDays(1))) {
+            throw new IllegalArgumentException("ERROR: No se puede realizar el CheckIn en una fecha posterior al final de la reserva.");
         }
         reserva.setCheckIn(fecha);
     }
@@ -203,6 +209,9 @@ public class Reservas {
         }
         if (reserva.getCheckIn()==null || reserva.getCheckIn().isAfter(fecha)){
             throw new IllegalArgumentException("ERROR: No se puede realizar el CheckOut sin un CheckIn previo.");
+        }
+        else if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusDays(1))) {
+            throw new IllegalArgumentException("ERROR: No se puede realizar el CheckOut en una fecha posterior al final de la reserva.");
         }
         reserva.setCheckOut(fecha);
     }
