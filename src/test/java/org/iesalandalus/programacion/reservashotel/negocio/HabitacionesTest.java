@@ -14,23 +14,23 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HabitacionesTest {
 
     private static final String ERROR_CAPACIDAD_NO_CORRECTA = "ERROR: La capacidad debe ser mayor que cero.";
-    private static final String ERROR_INSERTAR_HABITACION_NULA = "ERROR: No se puede insertar una habitaci�n nula.";
-    private static final String ERROR_BORRAR_HABITACION_NULA = "ERROR: No se puede borrar una habitaci�n nula.";
-    private static final String ERROR_NO_MAS_HABITACIONES = "ERROR: No se aceptan m�s habitaciones.";
-    private static final String ERROR_HABITACION_EXISTE = "ERROR: Ya existe una habitaci�n con ese identificador.";
-    private static final String ERROR_HABITACION_BORRAR_NO_EXISTE = "ERROR: No existe ninguna habitaci�n como la indicada.";
+    private static final String ERROR_INSERTAR_HABITACION_NULA = "ERROR: No se puede insertar una habitación nula.";
+    private static final String ERROR_BORRAR_HABITACION_NULA = "ERROR: No se puede borrar una habitación nula.";
+    private static final String ERROR_NO_MAS_HABITACIONES = "ERROR: No se aceptan más habitaciones.";
+    private static final String ERROR_HABITACION_EXISTE = "ERROR: Ya existe una habitación con ese identificador.";
+    private static final String ERROR_HABITACION_BORRAR_NO_EXISTE = "ERROR: No existe ninguna habitación como la indicada.";
 
-    private static final String OPERACION_NO_PERMITIDA = "Deber�a haber saltado una excepci�n indicando que dicha operaci�n no est� permitida.";
-    private static final String HABITACION_NULA = "Deber�a haber saltado una excepci�n indicando que no se puede operar con un habitaci�n nula.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepci�n no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepci�n no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No deber�a haber saltado la excepci�n.";
-    private static final String OPERACION_NO_REALIZADA = "La operaci�n no la ha realizado correctamente.";
-    private static final String HABITACIONES_NO_CREADAS = "Deber�a haber creado las habitaciones correctamente.";
+    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
+    private static final String HABITACION_NULA = "Debería haber saltado una excepción indicando que no se puede operar con un habitación nula.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No Debería haber saltado la excepción.";
+    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
+    private static final String HABITACIONES_NO_CREADAS = "Debería haber creado las habitaciones correctamente.";
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
-    private static final String TAMANO_NO_ESPERADO = "El tama�o devuelto no es el esperado.";
-    private static final String HABITACION_NO_ESPERADA = "La habitaci�n devuelta no es la que deber�a ser.";
-    private static final String OBJETO_DEBERIA_SER_NULO = "No se deber�a haber creado el objeto.";
+    private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
+    private static final String HABITACION_NO_ESPERADA = "La habitación devuelta no es la que Debería ser.";
+    private static final String OBJETO_DEBERIA_SER_NULO = "No se Debería haber creado el objeto.";
 
 
 
@@ -58,12 +58,12 @@ public class HabitacionesTest {
         habitacionRepetida1 =new Habitacion(PLANTA_1, PUERTA_0, PRECIO_HABITACION_VALIDO, TIPO_HABITACION_SIMPLE_VALIDA);
 
     }
-
+    public static int CAPACIDAD=3;
     @Test
     public void constructorCapacidadValidaCreaHabitacionCorrectamente() {
-        Habitaciones habitaciones = new Habitaciones(MainApp.CAPACIDAD);
+        Habitaciones habitaciones = new Habitaciones(CAPACIDAD);
         assertNotEquals(null, habitaciones, HABITACIONES_NO_CREADAS);
-        assertEquals(MainApp.CAPACIDAD, habitaciones.getCapacidad(), HABITACIONES_NO_CREADAS);
+        assertEquals(CAPACIDAD, habitaciones.getCapacidad(), HABITACIONES_NO_CREADAS);
         assertEquals(0, habitaciones.getTamano(), TAMANO_NO_ESPERADO);
     }
 

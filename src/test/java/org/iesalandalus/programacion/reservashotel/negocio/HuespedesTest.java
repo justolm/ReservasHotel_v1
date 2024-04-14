@@ -14,30 +14,30 @@ import static org.junit.jupiter.api.Assertions.*;
 public class HuespedesTest {
 
     private static final String ERROR_CAPACIDAD_NO_CORRECTA = "ERROR: La capacidad debe ser mayor que cero.";
-    private static final String ERROR_INSERTAR_HUESPED_NULO = "ERROR: No se puede insertar un hu�sped nulo.";
-    private static final String ERROR_BORRAR_HUESPED_NULO = "ERROR: No se puede borrar un hu�sped nulo.";
-    private static final String ERROR_NO_MAS_HUESPEDES = "ERROR: No se aceptan m�s hu�spedes.";
-    private static final String ERROR_HUESPED_EXISTE = "ERROR: Ya existe un hu�sped con ese dni.";
-    private static final String ERROR_HUESPED_BORRAR_NO_EXISTE = "ERROR: No existe ning�n hu�sped como el indicado.";
+    private static final String ERROR_INSERTAR_HUESPED_NULO = "ERROR: No se puede insertar un huésped nulo.";
+    private static final String ERROR_BORRAR_HUESPED_NULO = "ERROR: No se puede borrar un huésped nulo.";
+    private static final String ERROR_NO_MAS_HUESPEDES = "ERROR: No se aceptan más huéspedes.";
+    private static final String ERROR_HUESPED_EXISTE = "ERROR: Ya existe un huésped con ese dni.";
+    private static final String ERROR_HUESPED_BORRAR_NO_EXISTE = "ERROR: No existe ningún huésped como el indicado.";
 
-    private static final String OPERACION_NO_PERMITIDA = "Deber�a haber saltado una excepci�n indicando que dicha operaci�n no est� permitida.";
-    private static final String HUESPED_NULO = "Deber�a haber saltado una excepci�n indicando que no se puede operar con un hu�sped nulo.";
-    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepci�n no es correcto.";
-    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepci�n no es correcto.";
-    private static final String EXCEPCION_NO_PROCEDE = "No deber�a haber saltado la excepci�n.";
-    private static final String OPERACION_NO_REALIZADA = "La operaci�n no la ha realizado correctamente.";
-    private static final String HUESPEDES_NO_CREADOS = "Deber�a haber creado los hu�spedes correctamente.";
+    private static final String OPERACION_NO_PERMITIDA = "Debería haber saltado una excepción indicando que dicha operación no está permitida.";
+    private static final String HUESPED_NULO = "Debería haber saltado una excepción indicando que no se puede operar con un huésped nulo.";
+    private static final String MENSAJE_EXCEPCION_NO_CORRECTO = "El mensaje devuelto por la excepción no es correcto.";
+    private static final String TIPO_EXCEPCION_NO_CORRECTO = "El tipo de la excepción no es correcto.";
+    private static final String EXCEPCION_NO_PROCEDE = "No Debería haber saltado la excepción.";
+    private static final String OPERACION_NO_REALIZADA = "La operación no la ha realizado correctamente.";
+    private static final String HUESPEDES_NO_CREADOS = "Debería haber creado los huéspedes correctamente.";
     private static final String REFERENCIA_NO_ESPERADA = "La referencia devuelta es la misma que la pasada.";
-    private static final String TAMANO_NO_ESPERADO = "El tama�o devuelto no es el esperado.";
-    private static final String HUESPED_NO_ESPERADO = "El hu�sped devuelto no es el que deber�a ser.";
-    private static final String OBJETO_DEBERIA_SER_NULO = "No se deber�a haber creado el objeto.";
+    private static final String TAMANO_NO_ESPERADO = "El tamaño devuelto no es el esperado.";
+    private static final String HUESPED_NO_ESPERADO = "El huésped devuelto no es el que Debería ser.";
+    private static final String OBJETO_DEBERIA_SER_NULO = "No se Debería haber creado el objeto.";
 
-    private static final String NOMBRE_JRJR = "Jos� Ram�n Jim�nez Reyes";
+    private static final String NOMBRE_JRJR = "José Ramón Jiménez Reyes";
     private static final String DNI_JRJR = "11223344B";
     private static final String TELEFONO_JRJR = "950112233";
     private static final String CORREO_JRJR = "joseramon.jimenez@iesalandalus.org";
     private static final LocalDate FECHA_NACIMIENTO_JRJR=LocalDate.of(2002, 9, 15);
-    private static final String NOMBRE_ARDR = "Andr�s Rubio Del R�o";
+    private static final String NOMBRE_ARDR = "Andrés Rubio Del Río";
     private static final String DNI_ARDR = "22334455Y";
     private static final String TELEFONO_ARDR = "666223344";
     private static final String CORREO_ARDR = "andres.rubio@iesalandalus.org";

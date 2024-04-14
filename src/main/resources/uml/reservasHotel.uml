@@ -114,7 +114,7 @@
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_RHzHQYJlEe6QdoGXmx4hFA" name="mostrarMenu" specification="_RHzHQIJlEe6QdoGXmx4hFA">
             <language>JAVA</language>
             <body>&#xD;
-    System.out.println(&quot;Gesti�n de Hoteles IES Al-�ndalus&quot;);&#xD;
+    System.out.println(&quot;Gestión de Hoteles IES Al-Ándalus&quot;);&#xD;
     for (Opcion opcion : Opcion.values()) {&#xD;
         System.out.println(opcion);&#xD;
     }&#xD;
@@ -125,7 +125,7 @@
             <body>&#xD;
     int ordinalOpcion;&#xD;
     do {&#xD;
-        System.out.println(&quot;\nElige una opci�n: &quot;);&#xD;
+        System.out.println(&quot;\nElige una opción: &quot;);&#xD;
         ordinalOpcion = Entrada.entero();&#xD;
     } while (ordinalOpcion &lt; 0 || ordinalOpcion > Opcion.values().length);&#xD;
     return Opcion.values()[ordinalOpcion];&#xD;
@@ -145,14 +145,14 @@
         dni = Entrada.cadena();&#xD;
     } while (dni.isEmpty());&#xD;
     do {&#xD;
-        System.out.print(&quot;Introduce el tel�fono del huesped: &quot;);&#xD;
+        System.out.print(&quot;Introduce el teléfono del huesped: &quot;);&#xD;
         telefono = Entrada.cadena();&#xD;
     } while (telefono.isEmpty());&#xD;
     do {&#xD;
         System.out.print(&quot;Introduce el correo del huesped: &quot;);&#xD;
         correo = Entrada.cadena();&#xD;
     } while (correo.isEmpty());&#xD;
-    fechaNacimiento = leerFecha(&quot;Introduce la fecha nacimiento del hu�sped (dd/mm/aaaa): &quot;);&#xD;
+    fechaNacimiento = leerFecha(&quot;Introduce la fecha nacimiento del huésped (dd/mm/aaaa): &quot;);&#xD;
     return new Huesped(nombre, dni, correo, telefono, fechaNacimiento);&#xD;
 </body>
           </ownedBehavior>
@@ -190,15 +190,15 @@
     double precio;&#xD;
     String descripcion;&#xD;
     TipoHabitacion tipoHabitacion;&#xD;
-    System.out.print(&quot;Introduce el n�mero de planta de la habitaci�n (&quot; + Habitacion.MIN_NUMERO_PLANTA + &quot;-&quot; + Habitacion.MAX_NUMERO_PLANTA + &quot;): &quot;);&#xD;
+    System.out.print(&quot;Introduce el número de planta de la habitación (&quot; + Habitacion.MIN_NUMERO_PLANTA + &quot;-&quot; + Habitacion.MAX_NUMERO_PLANTA + &quot;): &quot;);&#xD;
     planta = Entrada.entero();&#xD;
-    System.out.print(&quot;Introduce el n�mero de puerta de la habitaci�n (&quot; + Habitacion.MIN_NUMERO_PUERTA + &quot;-&quot; + Habitacion.MAX_NUMERO_PUERTA + &quot;): &quot;);&#xD;
+    System.out.print(&quot;Introduce el número de puerta de la habitación (&quot; + Habitacion.MIN_NUMERO_PUERTA + &quot;-&quot; + Habitacion.MAX_NUMERO_PUERTA + &quot;): &quot;);&#xD;
     puerta = Entrada.entero();&#xD;
     tipoHabitacion = leerTipoHabitacion();&#xD;
-    System.out.print(&quot;Introduce el precio de la habitaci�n (&quot; + Habitacion.MIN_PRECIO_HABITACION + &quot;-&quot; + Habitacion.MAX_PRECIO_HABITACION + &quot;): &quot;);&#xD;
+    System.out.print(&quot;Introduce el precio de la habitación (&quot; + Habitacion.MIN_PRECIO_HABITACION + &quot;-&quot; + Habitacion.MAX_PRECIO_HABITACION + &quot;): &quot;);&#xD;
     precio = Entrada.realDoble();&#xD;
     do {&#xD;
-        System.out.print(&quot;Introduce la descripci�n de la habitaci�n: &quot;);&#xD;
+        System.out.print(&quot;Introduce la descripción de la habitación: &quot;);&#xD;
         descripcion = Entrada.cadena();&#xD;
     } while (descripcion.isEmpty());&#xD;
     return new Habitacion(planta, puerta, precio, tipoHabitacion, descripcion);&#xD;
@@ -208,23 +208,23 @@
             <language>JAVA</language>
             <body>&#xD;
     int puerta, planta;&#xD;
-    System.out.print(&quot;Introduce el n�mero de planta de la habitaci�n: &quot;);&#xD;
+    System.out.print(&quot;Introduce el número de planta de la habitación: &quot;);&#xD;
     planta = Entrada.entero();&#xD;
-    System.out.print(&quot;Introduce el n�mero de puerta de la habitaci�n: &quot;);&#xD;
+    System.out.print(&quot;Introduce el número de puerta de la habitación: &quot;);&#xD;
     puerta = Entrada.entero();&#xD;
-    return new Habitacion(planta, puerta, 40, TipoHabitacion.SIMPLE, &quot;Habitaci�n ficticia&quot;);&#xD;
+    return new Habitacion(planta, puerta, 40, TipoHabitacion.SIMPLE, &quot;habitación ficticia&quot;);&#xD;
 </body>
           </ownedBehavior>
           <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_RIENAYJlEe6QdoGXmx4hFA" name="leerTipoHabitacion" specification="_RIBwwIJlEe6QdoGXmx4hFA">
             <language>JAVA</language>
             <body>&#xD;
     int ordinalTipoHabitacion;&#xD;
-    System.out.println(&quot;Tipo de Habitaci�n hoteles IES Al-�ndalus&quot;);&#xD;
+    System.out.println(&quot;Tipo de habitación hoteles IES Al-Ándalus&quot;);&#xD;
     for (TipoHabitacion tipo : TipoHabitacion.values()) {&#xD;
         System.out.println(tipo);&#xD;
     }&#xD;
     do {&#xD;
-        System.out.println(&quot;\nElige el tipo de habitaci�n: &quot;);&#xD;
+        System.out.println(&quot;\nElige el tipo de habitación: &quot;);&#xD;
         ordinalTipoHabitacion = Entrada.entero();&#xD;
     } while (ordinalTipoHabitacion &lt; 0 || ordinalTipoHabitacion > TipoHabitacion.values().length);&#xD;
     return TipoHabitacion.values()[ordinalTipoHabitacion];&#xD;
@@ -234,7 +234,7 @@
             <language>JAVA</language>
             <body>&#xD;
     int ordinalRegimen;&#xD;
-    System.out.println(&quot;Tipo de r�gimenes de los hoteles IES Al-�ndalus&quot;);&#xD;
+    System.out.println(&quot;Tipo de régimenes de los hoteles IES Al-Ándalus&quot;);&#xD;
     for (Regimen regimen : Regimen.values()) {&#xD;
         System.out.println(regimen);&#xD;
     }&#xD;
@@ -258,7 +258,7 @@
     regimen = leerRegimen();&#xD;
     fechaInicioReserva = leerFecha(&quot;Introduce la fecha de inicio de la reserva (dd/mm/aaaa): &quot;);&#xD;
     fechaFinReserva = leerFecha(&quot;Introduce la fecha de fin de la reserva (dd/mm/aaaa): &quot;);&#xD;
-    System.out.print(&quot;Introduce el n�mero de personas que conforman la reserva: &quot;);&#xD;
+    System.out.print(&quot;Introduce el número de personas que conforman la reserva: &quot;);&#xD;
     numeroPersonasReserva = Entrada.entero();&#xD;
     return null;&#xD;
 //return new Reserva(huesped, regimen,fechaInicioReserva,fechaFinReserva,numeroPersonasReserva);&#xD;

@@ -58,7 +58,7 @@ public class Consola {
         return new Huesped("nombre",dni,"correo@falso.es","950000000", LocalDate.of(2000,1,1));
     }
 
-    public static LocalDate leerFecha(String mensaje) throws NullPointerException, IllegalArgumentException {
+    public static LocalDate leerFecha(String mensaje) throws NullPointerException{
         DateTimeFormatter formatoFecha = DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_RESERVA);
         if (mensaje == null) {
             throw new NullPointerException("ERROR: La fecha está vacía.");
@@ -66,11 +66,12 @@ public class Consola {
         try {
             return LocalDate.parse(mensaje, formatoFecha);
         } catch (DateTimeException e){
-            throw new IllegalArgumentException("ERROR: La fecha no tiene un formato válido.");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
-    public static LocalDateTime leerFechaHora (String mensaje) {
+    public static LocalDateTime leerFechaHora (String mensaje) throws NullPointerException {
         DateTimeFormatter formatoFechaHora = DateTimeFormatter.ofPattern(Reserva.FORMATO_FECHA_HORA_RESERVA);
         if (mensaje==null){
             throw new NullPointerException("ERROR: La fecha/hora está vacía.");
@@ -78,8 +79,9 @@ public class Consola {
         try {
             return LocalDateTime.parse(mensaje, formatoFechaHora);
         } catch (DateTimeException e){
-            throw new IllegalArgumentException("ERROR: La fecha/hora no tiene un formato válido.");
+            System.out.println(e.getMessage());
         }
+        return null;
     }
 
     public static Habitacion leerHabitacion(){

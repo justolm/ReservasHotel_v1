@@ -194,26 +194,40 @@ public class Reservas {
         else if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusDays(1))) {
             throw new IllegalArgumentException("ERROR: No se puede realizar el CheckIn en una fecha posterior al final de la reserva.");
         }
-        reserva.setCheckIn(fecha);
+        for (int i = 0 ; i < coleccionReservas.length ; i++) {
+            if (coleccionReservas[i]!=null){
+                if (coleccionReservas[i].equals(reserva)) {
+                    coleccionReservas[i].setCheckIn(fecha);
+                    System.out.println("CheckIn añadido a la reserva.");
+                }
+            }
+        }
     }
 
     public void realizarCheckout (Reserva reserva, LocalDateTime fecha) throws IllegalArgumentException, NullPointerException{
         if (reserva==null){
             throw new NullPointerException("ERROR: La reserva no puede ser nula.");
         }
-        if (fecha==null){
+        else if (fecha==null){
             throw new NullPointerException("ERROR: La fecha no puede ser nula");
         }
-        if (fecha.isAfter(LocalDateTime.now())) {
+        else if (fecha.isAfter(LocalDateTime.now())) {
             throw new IllegalArgumentException("ERROR: La fecha no puede ser posterior a la actual.");
         }
-        if (reserva.getCheckIn()==null || reserva.getCheckIn().isAfter(fecha)){
+        else if (reserva.getCheckIn()==null || reserva.getCheckIn().isAfter(fecha)){
             throw new IllegalArgumentException("ERROR: No se puede realizar el CheckOut sin un CheckIn previo.");
         }
         else if (fecha.isAfter(reserva.getFechaFinReserva().atStartOfDay().plusDays(1))) {
             throw new IllegalArgumentException("ERROR: No se puede realizar el CheckOut en una fecha posterior al final de la reserva.");
         }
-        reserva.setCheckOut(fecha);
+        for (int i = 0 ; i < coleccionReservas.length ; i++) {
+            if (coleccionReservas[i]!=null){
+                if (coleccionReservas[i].equals(reserva)) {
+                    coleccionReservas[i].setCheckOut(fecha);
+                    System.out.println("CheckOut añadido a la reserva.");
+                }
+            }
+        }
     }
 
 }

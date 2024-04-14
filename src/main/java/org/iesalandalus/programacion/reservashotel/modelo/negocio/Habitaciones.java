@@ -23,10 +23,10 @@ public class Habitaciones {
     private Habitacion[] copiaProfundaHabitaciones() throws NullPointerException{
         tamano=getTamano();
         if (tamano<1){
-            throw new NullPointerException("ERROR: No es posible copiar una colecci�n vac�a");
+            throw new NullPointerException("ERROR: No es posible copiar una colección vacía");
         }
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colecci�n vac�a5");
+            throw new NullPointerException("ERROR: Colección vacía.");
         Habitacion[] copiaProfundaHabitaciones = new Habitacion[getCapacidad()];
         for (int i = 0; i < tamano; i++) {
             copiaProfundaHabitaciones[i] = new Habitacion(coleccionHabitaciones[i]);
@@ -35,15 +35,15 @@ public class Habitaciones {
     }
     public Habitacion[] get(TipoHabitacion tipoHabitacion) throws NullPointerException{
         if (tipoHabitacion==null){
-            throw new NullPointerException("ERROR: El tipo de habitaci�n no puede estar vac�o.");
+            throw new NullPointerException("ERROR: El tipo de habitación no puede estar vacío.");
         }
         tamano=getTamano();
         int j=0;
         if (tamano<1){
-            throw new NullPointerException("ERROR: No es posible copiar una colecci�n vac�a");
+            throw new NullPointerException("ERROR: No es posible copiar una colección vacía.");
         }
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colecci�n vac�a5");
+            throw new NullPointerException("ERROR: Colección vacía.");
         Habitacion[] copiaProfundaHabitacionesFiltro = new Habitacion[getCapacidad()];
         for (int i = 0; i < tamano; i++) {
             if (coleccionHabitaciones[i].getTipoHabitacion().equals(tipoHabitacion)){
@@ -69,22 +69,22 @@ public class Habitaciones {
     }
     public void insertar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException {
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colecci�n inexistente");
+            throw new NullPointerException("ERROR: Colección inexistente");
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se puede insertar una habitaci�n nula.");
+            throw new NullPointerException("ERROR: No se puede insertar una habitación nula.");
         if (buscarIndice(habitacion)<getCapacidad()){
-            throw new OperationNotSupportedException("ERROR: Ya existe una habitaci�n con ese identificador.");
+            throw new OperationNotSupportedException("ERROR: Ya existe una habitación con ese identificador.");
         }
         if (getTamano()<getCapacidad()){
             coleccionHabitaciones[getTamano()]=new Habitacion(habitacion);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No se aceptan m�s habitaciones.");
+            throw new OperationNotSupportedException("ERROR: No se aceptan más habitaciones.");
         }
     }
     private int buscarIndice(Habitacion habitacion) throws NullPointerException{
         if (habitacion==null){
-            throw new NullPointerException("ERROR: No se puede buscar sin indicar una habitaci�n.");
+            throw new NullPointerException("ERROR: No se puede buscar sin indicar una habitación.");
         }
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHabitaciones[i]==null){
@@ -98,7 +98,7 @@ public class Habitaciones {
     }
     private Boolean tamanoSuperado(int indice) throws IllegalArgumentException{
         if (indice<0){
-            throw new IllegalArgumentException("ERROR: Indice tama�o incorrecto");
+            throw new IllegalArgumentException("ERROR: Indice tamaño incorrecto");
         }
         else if (indice >0 && indice<getTamano()){
             return false;
@@ -116,9 +116,9 @@ public class Habitaciones {
     }
     public Habitacion buscar(Habitacion habitacion) throws NullPointerException{
         if (habitacion==null)
-            throw new NullPointerException("ERROR:Buscar habitaci�n nula");
+            throw new NullPointerException("ERROR:Buscar habitación nula");
         if (coleccionHabitaciones==null)
-            throw new NullPointerException("ERROR:Colecci�n vac�a");
+            throw new NullPointerException("ERROR: Colección vacía.");
         for(int i = 0; i < getTamano(); i++){
             if (coleccionHabitaciones[i].equals(habitacion)){//huesped.getDni().equals(coleccionHuespedes[i].getDni())){ //coleccionHuespedes[i].equals(huesped)
                 return new Habitacion(habitacion);
@@ -128,14 +128,14 @@ public class Habitaciones {
     }
     public void borrar (Habitacion habitacion) throws OperationNotSupportedException, NullPointerException{
         if (habitacion==null)
-            throw new NullPointerException("ERROR: No se puede borrar una habitaci�n nula.");
+            throw new NullPointerException("ERROR: No se puede borrar una habitación nula.");
         int indice = buscarIndice(habitacion);
         if (indice<=getCapacidad()){
             coleccionHabitaciones[indice]=null;
             desplazarUnaPosicionIzquierda(indice);
         }
         else {
-            throw new OperationNotSupportedException("ERROR: No existe ninguna habitaci�n como la indicada.");
+            throw new OperationNotSupportedException("ERROR: No existe ninguna habitación como la indicada.");
         }
     }
     private void desplazarUnaPosicionIzquierda(int indice){

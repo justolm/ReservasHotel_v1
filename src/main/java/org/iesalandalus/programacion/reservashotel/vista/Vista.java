@@ -1,11 +1,7 @@
 package org.iesalandalus.programacion.reservashotel.vista;
 
 import org.iesalandalus.programacion.reservashotel.controlador.Controlador;
-import org.iesalandalus.programacion.reservashotel.modelo.Modelo;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Habitacion;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Huesped;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.Reserva;
-import org.iesalandalus.programacion.reservashotel.modelo.dominio.TipoHabitacion;
+import org.iesalandalus.programacion.reservashotel.modelo.dominio.*;
 import org.iesalandalus.programacion.utilidades.Entrada;
 
 import javax.naming.OperationNotSupportedException;
@@ -54,6 +50,7 @@ public class Vista {
                 insertarHuesped();
                 break;
             case BUSCAR_HUESPED:
+                inicializarDatos(); // Método creado para generar datos válidos para realizar pruebas.
                 buscarHuesped();
                 break;
             case BORRAR_HUESPED:
@@ -113,6 +110,10 @@ public class Vista {
                 break;
             case REALIZAR_CHECKIN:
                 realizarCheckin();
+                break;
+            case REALIZAR_CHECKOUT:
+                realizarCheckout();
+                break;
             case SALIR:
                 break;
         }
@@ -374,7 +375,7 @@ public class Vista {
                 if (numElementos == 0)
                 {
                     //Si la primera de las habitaciones encontradas del tipo solicitado no tiene reservas en el futuro,
-                    // quiere decir que est� disponible.
+                    // quiere decir que está disponible.
                     habitacionDisponible=new Habitacion(habitacionesTipoSolicitado[i]);
                     tipoHabitacionEncontrada=true;
                 }
@@ -382,7 +383,7 @@ public class Vista {
 
                     //Ordenamos de mayor a menor las reservas futuras encontradas por fecha de fin de la reserva.
                     // Si la fecha de inicio de la reserva es posterior a la mayor de las fechas de fin de las reservas
-                    // (la reserva de la posici�n 0), quiere decir que la habitaci�n est� disponible en las fechas indicadas.
+                    // (la reserva de la posición 0), quiere decir que la habitación está disponible en las fechas indicadas.
 
                     Arrays.sort(reservasFuturas, 0, numElementos, Comparator.comparing(Reserva::getFechaFinReserva).reversed());
 
@@ -398,7 +399,7 @@ public class Vista {
                     {
                         //Ordenamos de menor a mayor las reservas futuras encontradas por fecha de inicio de la reserva.
                         // Si la fecha de fin de la reserva es anterior a la menor de las fechas de inicio de las reservas
-                        // (la reserva de la posici�n 0), quiere decir que la habitaci�n est� disponible en las fechas indicadas.
+                        // (la reserva de la posición 0), quiere decir que la habitación está disponible en las fechas indicadas.
 
                         Arrays.sort(reservasFuturas, 0, numElementos, Comparator.comparing(Reserva::getFechaInicioReserva));
 
@@ -411,7 +412,7 @@ public class Vista {
                         }
                     }
 
-                    //Recorremos el array de reservas futuras para ver si las fechas solicitadas est�n alg�n hueco existente entre las fechas reservadas
+                    //Recorremos el array de reservas futuras para ver si las fechas solicitadas están algún hueco existente entre las fechas reservadas
                     if (!tipoHabitacionEncontrada)
                     {
                         for(int j=1;j<reservasFuturas.length && !tipoHabitacionEncontrada;j++)
@@ -449,14 +450,14 @@ public class Vista {
         return contadorNoNulos;
     }
 
-    private void realizarCheckin(){
+    private void realizarCheckin() throws NullPointerException, IllegalArgumentException {
         Reserva[] reservas;
-        Reserva reserva=null;
-        LocalDateTime fecha;
+        Reserva reserva = null;
+        LocalDateTime fecha = null;
         Huesped huesped;
         String confirmacion;
         int numOpcion=0, contador=0;
-        huesped=Consola.leerHuesped();
+        huesped=Consola.getHuespedPorDni();
         reservas=controlador.getReservas(huesped);
         if (reservas==null){
             throw new NullPointerException("ERROR: El cliente no tiene reservas.");
@@ -480,27 +481,39 @@ public class Vista {
             do {
                 numOpcion = Entrada.entero();
             } while (numOpcion < 0 || numOpcion > contador);
-            reserva = reservas[numOpcion];
+            reserva=reservas[numOpcion];
         }
-        fecha=Consola.leerFechaHora(Entrada.cadena());
-        if(reserva==null){
+        do{
+            if (fecha!=null){
+                System.out.print("Siga el patrón para la fecha. ");
+            }
+            System.out.println("Introduzca la fecha y hora de entrada (dd/MM/yy HH:mm): ");
+            fecha=Consola.leerFechaHora(Entrada.cadena());
+        } while (fecha.isBefore(LocalDate.now().atStartOfDay()));
+
+        if (reserva==null){
             throw new NullPointerException("ERROR: No se puede introducir una reserva nula.");
         }
-        try {
-            controlador.realizarCheckin(reserva, fecha);
-        } catch (NullPointerException e) {
-            throw new RuntimeException(e);
+        if (reserva.getCheckIn()!=null) {
+            throw new IllegalArgumentException("ERROR: No se puede modificar un CheckIn.");
+        }
+        else {
+            try {
+                controlador.realizarCheckin(reserva, fecha);
+            } catch (NullPointerException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
-    private void realizarCheckout(){
+    private void realizarCheckout() throws NullPointerException, IllegalArgumentException {
         Reserva[] reservas;
-        Reserva reserva=null;
-        LocalDateTime fecha;
+        Reserva reserva = null;
+        LocalDateTime fecha = null;
         Huesped huesped;
         String confirmacion;
         int numOpcion=0, contador=0;
-        huesped=Consola.leerHuesped();
+        huesped=Consola.getHuespedPorDni();
         reservas=controlador.getReservas(huesped);
         if (reservas==null){
             throw new NullPointerException("ERROR: El cliente no tiene reservas.");
@@ -526,7 +539,13 @@ public class Vista {
             } while (numOpcion < 0 || numOpcion > contador);
             reserva = reservas[numOpcion];
         }
-        fecha=Consola.leerFechaHora(Entrada.cadena());
+        do{
+            if (fecha!=null){
+                System.out.print("Siga el patrón para la fecha. ");
+            }
+            System.out.println("Introduzca la fecha y hora de entrada (dd/MM/yy HH:mm): ");
+            fecha=Consola.leerFechaHora(Entrada.cadena());
+        } while (fecha.isBefore(LocalDate.now().atStartOfDay()));
         if(reserva==null){
             throw new NullPointerException("ERROR: No se puede introducir una reserva nula.");
         }
@@ -535,5 +554,21 @@ public class Vista {
         } catch (NullPointerException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private void inicializarDatos () throws NullPointerException, IllegalArgumentException, OperationNotSupportedException{
+        Huesped huesped =  new Huesped("Justo Lopez", "45596798b", "justolm@gmail.com", "666619806", LocalDate.of(1980, 11, 19));
+        Huesped huesped1 = new Huesped("Noe Lilla", "11111111h", "noe@lilla.es", "650476674", LocalDate.of(1982, 11, 7));
+        Habitacion habitacion = new Habitacion(1,1,45.0, TipoHabitacion.DOBLE);
+        Habitacion habitacion1 = new Habitacion(3,13,80,TipoHabitacion.SUITE);
+        Reserva reserva = new Reserva(huesped, habitacion1, Regimen.MEDIA_PENSION, LocalDate.now(),LocalDate.now().plusDays(2),2);
+        Reserva reserva1 = new Reserva(huesped, habitacion, Regimen.SOLO_ALOJAMIENTO, LocalDate.of(2024, 5, 13), LocalDate.of(2024, 5, 15), 2);
+        controlador.insertar(huesped);
+        controlador.insertar(huesped1);
+        controlador.insertar(habitacion);
+        controlador.insertar(habitacion1);
+        controlador.insertar(reserva);
+        controlador.insertar(reserva1);
+        System.out.println("Datos inicializados. ");
     }
 }
